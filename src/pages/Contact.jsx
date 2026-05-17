@@ -172,7 +172,7 @@ export default function Contact() {
         min-h-screen w-full
         bg-white dark:bg-zinc-950
         transition-colors duration-500
-        pb-24 pr-16 md:pr-20
+        pb-24 md:pr-20
       ">
 
         {/* ── Page header — same pattern as About / Portfolio ── */}

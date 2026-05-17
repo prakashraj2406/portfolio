@@ -172,7 +172,7 @@ export default function Nav() {
       </nav>
 
       {/* Spacer so page content clears the mobile nav */}
-      <div className="md:hidden h-18" />
+      {/* <div className="md:hidden h-18" /> */}
     </>
   );
 }

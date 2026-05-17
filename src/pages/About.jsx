@@ -174,7 +174,7 @@ export default function About() {
         bg-white dark:bg-zinc-950
         text-zinc-800 dark:text-white
         transition-colors duration-500
-        pb-24 pr-16 md:pr-20
+        pb-24 md:pr-20
       "
       >
         {/* ── Page header ── */}

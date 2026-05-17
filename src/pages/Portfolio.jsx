@@ -117,7 +117,7 @@ export default function Portfolio() {
       min-h-screen w-full text-center
       bg-white dark:bg-zinc-950
       transition-colors duration-500
-      pb-24 pr-16 md:pr-20
+      pb-24 md:pr-20
     ">
 
       {/* ── Page header — same pattern as About ── */}
@@ -155,7 +155,7 @@ export default function Portfolio() {
       {/* ── Projects grid ── */}
       <section className="
         flex flex-wrap justify-center items-center
-        gap-8 px-6
+        gap-8
         pt-6 pb-4
       ">
         {PROJECTS.map((p, i) => (
