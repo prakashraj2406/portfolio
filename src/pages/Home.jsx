@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { TiArrowRightThick } from "react-icons/ti";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import Prakash from "../assets/Prakash.png";
+import Prakash from "../assets/prakash.png";
 import Resume from "../assets/Prakash_Raj.pdf";
 
 /* ── Typewriter hook ── */
