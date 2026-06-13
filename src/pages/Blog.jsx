@@ -16,8 +16,7 @@ const BLOGS = [
     date: "21st May, 2021",
     author: "Admin",
     title: "Web Developer",
-    excerpt:
-      "Jim Morrison says — when the music's over, turn off the light.",
+    excerpt: "Jim Morrison says — when the music's over, turn off the light.",
     url: "#",
   },
   {
@@ -25,8 +24,7 @@ const BLOGS = [
     date: "8th Aug, 2022",
     author: "Prakash",
     title: "Branding",
-    excerpt:
-      "How to be appreciated for your hard work as a developer.",
+    excerpt: "How to be appreciated for your hard work as a developer.",
     url: "#",
   },
   {
@@ -34,8 +32,7 @@ const BLOGS = [
     date: "14th Dec, 2022",
     author: "Leo",
     title: "Social Media",
-    excerpt:
-      "How designers and developers can collaborate better.",
+    excerpt: "How designers and developers can collaborate better.",
     url: "#",
   },
   {
@@ -43,8 +40,7 @@ const BLOGS = [
     date: "17th Mar, 2024",
     author: "Jeru",
     title: "UI/UX Design",
-    excerpt:
-      "Angular team enlarges to request blog — team work by design.",
+    excerpt: "Angular team enlarges to request blog — team work by design.",
     url: "#",
   },
   {
@@ -52,8 +48,7 @@ const BLOGS = [
     date: "9th July, 2023",
     author: "Ram",
     title: "Responsive Design",
-    excerpt:
-      "How to create a responsive website using HTML and CSS.",
+    excerpt: "How to create a responsive website using HTML and CSS.",
     url: "#",
   },
   {
@@ -61,8 +56,7 @@ const BLOGS = [
     date: "24th March, 2023",
     author: "Subash",
     title: "Shopify",
-    excerpt:
-      "We build teams that enlarge requests into blog-ready goals.",
+    excerpt: "We build teams that enlarge requests into blog-ready goals.",
     url: "#",
   },
 ];
@@ -80,7 +74,7 @@ function FadeUp({ children, delay = 0, className = "" }) {
           obs.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (ref.current) obs.observe(ref.current);
@@ -241,11 +235,7 @@ export default function Blog() {
           "
         >
           {BLOGS.map((blog, index) => (
-            <BlogCard
-              key={index}
-              {...blog}
-              delay={index * 100}
-            />
+            <BlogCard key={index} {...blog} delay={index * 100} />
           ))}
         </div>
       </div>

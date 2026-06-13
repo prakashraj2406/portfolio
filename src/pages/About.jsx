@@ -1,15 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { FaDownload, FaGraduationCap, FaBriefcase } from "react-icons/fa";
-import resume from "../assets/Prakash_Raj.pdf";
+import resume from "/Prakash_Raj_Resume.pdf";
 
 /* ── Skill data ── */
 const SKILLS = [
-  { label: "HTML & CSS", pct: 95, color: "#ef4444" },
-  { label: "JavaScript", pct: 90, color: "#facc15" },
-  { label: "React", pct: 85, color: "#38bdf8" },
-  { label: "Node.js", pct: 65, color: "#6366f1" },
-  { label: "MongoDB", pct: 75, color: "#22c55e" },
-  { label: "Bootstrap", pct: 98, color: "#3b3b3b" },
+  { label: "React.js", pct: 95, color: "#61dafb" },
+  { label: "JavaScript", pct: 92, color: "#f7df1e" },
+  { label: "TypeScript", pct: 85, color: "#3178c6" },
+  { label: "HTML5 & CSS3", pct: 98, color: "#e34f26" },
+  { label: "Tailwind CSS", pct: 95, color: "#06b6d4" },
+  { label: "Redux Toolkit", pct: 85, color: "#764abc" },
+  { label: "Node.js", pct: 80, color: "#339933" },
+  { label: "Express.js", pct: 80, color: "#000000" },
+  { label: "MongoDB", pct: 85, color: "#47a248" },
+  { label: "MySQL", pct: 80, color: "#4479a1" },
 ];
 
 /* ── Timeline data ── */
@@ -283,15 +287,15 @@ export default function About() {
           </section>
 
           {/* Stat boxes */}
-<section className="grid grid-cols-2 gap-4">
-  {[
-    { num: "1.5+", label: "Years Experience" },
-    { num: "10+", label: "Projects Completed" },
-    { num: "100+", label: "Positive Reviews" },
-  ].map(({ num, label }) => (
-    <div
-      key={label}
-      className="
+          <section className="grid grid-cols-2 gap-4">
+            {[
+              { num: "1.5+", label: "Years Experience" },
+              { num: "10+", label: "Projects Completed" },
+              { num: "100+", label: "Positive Reviews" },
+            ].map(({ num, label }) => (
+              <div
+                key={label}
+                className="
         w-full h-36 rounded-xl
         border border-zinc-200 dark:border-zinc-700
         bg-white dark:bg-zinc-900
@@ -301,16 +305,16 @@ export default function About() {
         hover:border-red-400 hover:shadow-lg hover:shadow-red-500/10
         hover:-translate-y-1
       "
-    >
-      <span className="font-poppins font-black text-3xl text-red-500 leading-none">
-        {num}
-      </span>
-      <span className="font-['Open_Sans'] text-xs font-semibold uppercase text-zinc-400 dark:text-zinc-500 mt-2 tracking-wide leading-tight">
-        {label}
-      </span>
-    </div>
-  ))}
-</section>
+              >
+                <span className="font-poppins font-black text-3xl text-red-500 leading-none">
+                  {num}
+                </span>
+                <span className="font-['Open_Sans'] text-xs font-semibold uppercase text-zinc-400 dark:text-zinc-500 mt-2 tracking-wide leading-tight">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </section>
         </FadeUp>
 
         {/* ── Divider ── */}
@@ -346,7 +350,7 @@ export default function About() {
           </h3>
           <div className="w-10 h-1 rounded-full bg-red-500 mb-12" />
 
-          <div className="flex flex-wrap gap-8">
+          <div className="flex flex-wrap gap-8 px-4">
             {TIMELINE.map((item, i) => (
               <FadeUp
                 key={i}
