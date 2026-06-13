@@ -13,7 +13,7 @@ import { IoPerson } from "react-icons/io5";
 const navLinks = [
   { to: "/", label: "Home", Icon: FaHome },
   { to: "/about", label: "About", Icon: IoPerson },
-  { to: "/portfolio", label: "Portfolio", Icon: FaBriefcase },
+  { to: "/projects", label: "Projects", Icon: FaBriefcase },
   { to: "/contact", label: "Contact", Icon: FaEnvelopeOpen },
   { to: "/blog", label: "Blog", Icon: FaComments },
 ];
