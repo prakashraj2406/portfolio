@@ -1,65 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { IoToday, IoPerson } from "react-icons/io5";
-import { FaLink } from "react-icons/fa";
-
-import Blog1 from "../assets/project-6.jpg";
-import Blog2 from "../assets/project-2.jpg";
-import Blog3 from "../assets/project-7.jpg";
-import Blog4 from "../assets/blog4.jpg";
-import Blog5 from "../assets/blog5.jpg";
-import Blog6 from "../assets/blog6.jpg";
-
-/* ── Blog data ── */
-const BLOGS = [
-  {
-    img: Blog1,
-    date: "21st May, 2021",
-    author: "Admin",
-    title: "Web Developer",
-    excerpt: "Jim Morrison says — when the music's over, turn off the light.",
-    url: "#",
-  },
-  {
-    img: Blog2,
-    date: "8th Aug, 2022",
-    author: "Prakash",
-    title: "Branding",
-    excerpt: "How to be appreciated for your hard work as a developer.",
-    url: "#",
-  },
-  {
-    img: Blog3,
-    date: "14th Dec, 2022",
-    author: "Leo",
-    title: "Social Media",
-    excerpt: "How designers and developers can collaborate better.",
-    url: "#",
-  },
-  {
-    img: Blog4,
-    date: "17th Mar, 2024",
-    author: "Jeru",
-    title: "UI/UX Design",
-    excerpt: "Angular team enlarges to request blog — team work by design.",
-    url: "#",
-  },
-  {
-    img: Blog5,
-    date: "9th July, 2023",
-    author: "Ram",
-    title: "Responsive Design",
-    excerpt: "How to create a responsive website using HTML and CSS.",
-    url: "#",
-  },
-  {
-    img: Blog6,
-    date: "24th March, 2023",
-    author: "Subash",
-    title: "Shopify",
-    excerpt: "We build teams that enlarge requests into blog-ready goals.",
-    url: "#",
-  },
-];
+import { Link } from "react-router-dom";
+import { IoToday, IoPerson, IoTime, IoArrowForward } from "react-icons/io5";
+import { FaTag } from "react-icons/fa";
+import { BLOGS } from "../data/blogs";
 
 /* ── FadeUp wrapper ── */
 function FadeUp({ children, delay = 0, className = "" }) {
@@ -78,7 +21,6 @@ function FadeUp({ children, delay = 0, className = "" }) {
     );
 
     if (ref.current) obs.observe(ref.current);
-
     return () => obs.disconnect();
   }, []);
 
@@ -98,84 +40,126 @@ function FadeUp({ children, delay = 0, className = "" }) {
 }
 
 /* ── Blog card ── */
-function BlogCard({ img, date, author, title, excerpt, url, delay }) {
+function BlogCard({
+  img,
+  date,
+  author,
+  title,
+  excerpt,
+  slug,
+  category,
+  readTime,
+  delay,
+}) {
   return (
-    <FadeUp
-      delay={delay}
-      className="
-        relative
-        w-full
-        max-w-95
-        min-h-125
-        bg-white dark:bg-zinc-900
-        rounded-[20px]
-        overflow-hidden
-        shadow-[0_20px_60px_rgba(0,0,0,0.12)]
-        dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)]
-        transition-all duration-500
-        flex flex-col
-        hover:-translate-y-2
-      "
-    >
-      {/* Image */}
-      <div className="w-full h-60 overflow-hidden rounded-t-[20px]">
-        <img
-          src={img}
-          alt={title}
+    <FadeUp delay={delay} className="w-full">
+      <Link to={`/blog/${slug}`} className="block group h-full">
+        <article
           className="
-            w-full h-full object-cover
-            transition-transform duration-2000
-            hover:scale-110
+            relative h-full flex flex-col
+            bg-white dark:bg-zinc-900
+            rounded-2xl overflow-hidden
+            border border-zinc-200 dark:border-zinc-800
+            shadow-sm dark:shadow-none
+            hover:border-red-400 dark:hover:border-red-500
+            hover:shadow-xl hover:shadow-red-500/10
+            hover:-translate-y-2
+            transition-all duration-500
             cursor-pointer
           "
-        />
-      </div>
+        >
+          {/* Preview image with category overlay */}
+          <div className="relative w-full h-56 overflow-hidden">
+            <img
+              src={img}
+              alt={title}
+              className="
+                w-full h-full object-cover
+                transition-transform duration-700
+                group-hover:scale-110
+              "
+            />
+            {/* Gradient overlay for category readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-      {/* Date + Author */}
-      <div
-        className="
-          absolute top-55 left-1/2 -translate-x-1/2
-          flex items-center gap-2
-          bg-zinc-900 dark:bg-black
-          px-4 py-2 rounded-xl
-          shadow-lg z-10
-          whitespace-nowrap
-        "
-      >
-        <IoToday className="text-red-500 text-sm" />
-        <span className="text-white text-xs">{date}</span>
-        <IoPerson className="text-red-500 text-sm" />
-        <span className="text-white text-xs">By {author}</span>
-      </div>
+            {/* Category pill */}
+            {category && (
+              <span
+                className="
+                  absolute top-4 left-4
+                  inline-flex items-center gap-1.5
+                  bg-red-500 text-white
+                  font-poppins text-[10px] font-bold uppercase tracking-wider
+                  px-3 py-1.5 rounded-full
+                  shadow-lg shadow-red-500/30
+                "
+              >
+                <FaTag className="text-[9px]" />
+                {category}
+              </span>
+            )}
+          </div>
 
-      {/* Content */}
-      <div className="flex flex-col items-center text-center px-6 pt-12 pb-6 flex-1">
-        <h3 className="font-poppins font-bold text-[22px] text-zinc-800 dark:text-white mb-3">
-          {title}
-        </h3>
+          {/* Content */}
+          <div className="flex flex-col flex-1 p-6">
+            {/* Meta row — date + read time */}
+            <div className="flex items-center gap-4 mb-3 text-zinc-400 dark:text-zinc-500 text-xs font-['Open_Sans']">
+              <span className="flex items-center gap-1.5">
+                <IoToday className="text-red-500 text-sm" />
+                {date}
+              </span>
+              {readTime && (
+                <>
+                  <span className="text-zinc-300 dark:text-zinc-700">•</span>
+                  <span className="flex items-center gap-1.5">
+                    <IoTime className="text-red-500 text-sm" />
+                    {readTime}
+                  </span>
+                </>
+              )}
+            </div>
 
-        <p className="text-zinc-500 dark:text-zinc-400 text-[15px] leading-7 mb-6">
-          {excerpt}
-        </p>
+            {/* Title */}
+            <h3
+              className="
+                font-poppins font-bold text-[19px] leading-tight
+                text-zinc-800 dark:text-white
+                mb-3 line-clamp-2
+                group-hover:text-red-500 dark:group-hover:text-red-500
+                transition-colors duration-300
+              "
+            >
+              {title}
+            </h3>
 
-        <a href={url} target="_blank" rel="noopener noreferrer">
-          <button
-            className="
-              flex items-center gap-2
-              bg-red-500 text-white
-              px-6 py-3 rounded-full
-              font-semibold text-sm
-              transition-all duration-300
-              hover:px-8 hover:shadow-lg hover:shadow-red-500/30
-            "
-          >
-            Read More
-            <span className="bg-white text-red-500 w-7 h-7 rounded-full flex items-center justify-center text-xs">
-              <FaLink />
-            </span>
-          </button>
-        </a>
-      </div>
+            {/* Excerpt */}
+            <p className="font-['Open_Sans'] text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
+              {excerpt}
+            </p>
+
+            {/* Footer — author + read more */}
+            <div className="flex items-center justify-between pt-4 border-t border-zinc-100 dark:border-zinc-800">
+              <span className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 text-xs font-['Open_Sans']">
+                <IoPerson className="text-red-500 text-sm" />
+                By <span className="font-semibold text-zinc-700 dark:text-zinc-200">{author}</span>
+              </span>
+
+              <span
+                className="
+                  inline-flex items-center gap-1.5
+                  font-poppins text-xs font-bold uppercase tracking-wider
+                  text-red-500
+                  group-hover:gap-3
+                  transition-all duration-300
+                "
+              >
+                Read More
+                <IoArrowForward className="text-sm" />
+              </span>
+            </div>
+          </div>
+        </article>
+      </Link>
     </FadeUp>
   );
 }
@@ -220,22 +204,26 @@ export default function Blog() {
         </div>
 
         <div className="mx-auto mt-3 w-16 h-1 rounded-full bg-red-500" />
+
+        <p className="font-['Open_Sans'] text-zinc-500 dark:text-zinc-400 text-sm sm:text-base mt-6 max-w-xl mx-auto px-4">
+          Field notes from shipping production systems — payroll, auth, cloud
+          storage, and the lessons that don't make it into tutorials.
+        </p>
       </FadeUp>
 
       {/* Cards Grid */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         <div
           className="
             grid
             grid-cols-1
             sm:grid-cols-2
             lg:grid-cols-3
-            gap-8
-            place-items-center
+            gap-6 lg:gap-8
           "
         >
           {BLOGS.map((blog, index) => (
-            <BlogCard key={index} {...blog} delay={index * 100} />
+            <BlogCard key={blog.slug} {...blog} delay={index * 100} />
           ))}
         </div>
       </div>

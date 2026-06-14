@@ -3,18 +3,39 @@ import { FaDownload, FaGraduationCap, FaBriefcase } from "react-icons/fa";
 import resume from "/Prakash_Raj_Resume.pdf";
 
 /* ── Skill data ── */
-const SKILLS = [
-  { label: "React.js", pct: 95, color: "#61dafb" },
-  { label: "JavaScript", pct: 92, color: "#f7df1e" },
-  { label: "TypeScript", pct: 85, color: "#3178c6" },
-  { label: "HTML5 & CSS3", pct: 98, color: "#e34f26" },
-  { label: "Tailwind CSS", pct: 95, color: "#06b6d4" },
-  { label: "Redux Toolkit", pct: 85, color: "#764abc" },
-  { label: "Node.js", pct: 80, color: "#339933" },
-  { label: "Express.js", pct: 80, color: "#000000" },
-  { label: "MongoDB", pct: 85, color: "#47a248" },
-  { label: "MySQL", pct: 80, color: "#4479a1" },
-];
+/* ── Skill data (categorized) ── */
+const SKILLS = {
+  Frontend: [
+    { label: "React.js", pct: 95, color: "#61dafb" },
+    { label: "JavaScript (ES6+)", pct: 92, color: "#f7df1e" },
+    { label: "TypeScript", pct: 85, color: "#3178c6" },
+    { label: "HTML5", pct: 98, color: "#e34f26" },
+    { label: "CSS3", pct: 95, color: "#1572b6" },
+    { label: "Tailwind CSS", pct: 95, color: "#06b6d4" },
+    { label: "Bootstrap", pct: 85, color: "#7952b3" },
+    { label: "Redux Toolkit", pct: 85, color: "#764abc" },
+  ],
+  Backend: [
+    { label: "Node.js", pct: 85, color: "#339933" },
+    { label: "Express.js", pct: 85, color: "#6BA644" },
+    { label: "RESTful APIs", pct: 90, color: "#ff6b35" },
+  ],
+  Databases: [
+    { label: "MongoDB", pct: 88, color: "#47a248" },
+    { label: "MySQL", pct: 82, color: "#4479a1" },
+    { label: "SQL", pct: 85, color: "#e48e00" },
+  ],
+  Tools: [
+    { label: "AWS S3", pct: 80, color: "#ff9900" },
+    { label: "Mailjet", pct: 85, color: "#fdb813" },
+    { label: "Git & GitHub", pct: 90, color: "#f05032" },
+    { label: "Postman", pct: 88, color: "#ff6c37" },
+    { label: "Jira", pct: 80, color: "#0052cc" },
+    { label: "BrowserStack", pct: 75, color: "#ed3a3f" },
+  ],
+};
+
+const CATEGORIES = Object.keys(SKILLS);
 
 /* ── Timeline data ── */
 const TIMELINE = [
@@ -162,6 +183,7 @@ function FadeUp({ children, delay = 0, className = "" }) {
    MAIN COMPONENT
 ══════════════════════════════════════════ */
 export default function About() {
+  const [activeTab, setActiveTab] = useState("Frontend");
   return (
     <>
       {/* Shimmer keyframe injected once */}
@@ -321,24 +343,47 @@ export default function About() {
         <div className="w-1/2 mx-auto h-px bg-zinc-200 dark:bg-zinc-800 mb-16" />
 
         {/* ── Skills ── */}
-        <FadeUp delay={100} className="w-[92%] max-w-3xl mx-auto mb-6">
-          <h3 className="font-poppins font-black uppercase text-2xl sm:text-3xl mb-1">
-            My <span className="text-red-500">Skills</span>
-          </h3>
-          <div className="w-10 h-1 rounded-full bg-red-500 mb-10" />
+<FadeUp delay={100} className="w-[92%] max-w-3xl mx-auto mb-6">
+  <h3 className="font-poppins font-black uppercase text-2xl sm:text-3xl mb-1">
+    My <span className="text-red-500">Skills</span>
+  </h3>
+  <div className="w-10 h-1 rounded-full bg-red-500 mb-8" />
 
-          <div className="flex flex-col gap-7">
-            {SKILLS.map(({ label, pct, color }, i) => (
-              <SkillBar
-                key={label}
-                label={label}
-                pct={pct}
-                color={color}
-                delay={i * 120}
-              />
-            ))}
-          </div>
-        </FadeUp>
+  {/* Tabs */}
+  <div className="flex flex-wrap gap-2 mb-10">
+    {CATEGORIES.map((cat) => (
+      <button
+        key={cat}
+        onClick={() => setActiveTab(cat)}
+        className={`
+          font-poppins text-xs font-bold uppercase tracking-wider
+          px-5 py-2.5 rounded-full cursor-pointer
+          transition-all duration-300
+          ${
+            activeTab === cat
+              ? "bg-red-500 text-white shadow-md shadow-red-500/30 -translate-y-0.5"
+              : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-800 dark:hover:text-zinc-200"
+          }
+        `}
+      >
+        {cat}
+      </button>
+    ))}
+  </div>
+
+  {/* Skill bars for active tab */}
+  <div className="flex flex-col gap-7">
+    {SKILLS[activeTab].map(({ label, pct, color }, i) => (
+      <SkillBar
+        key={`${activeTab}-${label}`}
+        label={label}
+        pct={pct}
+        color={color}
+        delay={i * 120}
+      />
+    ))}
+  </div>
+</FadeUp>
 
         {/* ── Divider ── */}
         <div className="w-1/2 mx-auto h-px bg-zinc-200 dark:bg-zinc-800 my-16" />

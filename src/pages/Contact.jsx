@@ -14,9 +14,6 @@ const EJS_KEY = "7pEh6v6GdpXjcr9HZ";
 
 /* ─── Social links ─── */
 const SOCIALS = [
-  { Icon: FaFacebookF, href: "#", label: "Facebook" },
-  { Icon: FaXTwitter, href: "#", label: "Twitter" },
-  { Icon: FaInstagram, href: "#", label: "Instagram" },
   {
     Icon: FaLinkedin,
     href: "https://www.linkedin.com/in/prakash-raj-m/",
@@ -27,6 +24,9 @@ const SOCIALS = [
     href: "https://github.com/prakashraj2406",
     label: "GitHub",
   },
+  { Icon: FaInstagram, href: "#", label: "Instagram" },
+  { Icon: FaFacebookF, href: "#", label: "Facebook" },
+  { Icon: FaXTwitter, href: "#", label: "Twitter" },
 ];
 
 /* ─── FadeUp wrapper ─── */
